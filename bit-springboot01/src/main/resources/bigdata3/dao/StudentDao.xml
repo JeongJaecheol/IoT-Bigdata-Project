@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bigdata3.dao.StudentDao">
+
+  <resultMap type="student" id="studentMap"> 
+    <id column="mno" property="no"/>
+    <result column="email" property="email"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="pwd" property="password"/>
+    <result column="work" property="workingYn"/>
+    <result column="lst_schl" property="lastEducation"/>
+    <result column="schl_nm" property="schoolName"/>
+    <result column="pst_no" property="postNumber"/>
+    <result column="bas_adr" property="primaryAddress"/>
+    <result column="det_adr" property="detailAddress"/>
+    <result column="path" property="photoName" />
+  </resultMap>
+
+  <resultMap type="student" id="studentSimpleMap">
+    <id column="mno" property="no"/>
+    <result column="email" property="email"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="pwd" property="password"/>
+    <result column="work" property="workingYn"/>
+  </resultMap>  
+    
+  <select id="selectList" resultMap="studentSimpleMap" parameterType="map">
+    select  m.mno, m.name, m.tel, m.email, s.work
+    from stud s inner join memb m on s.sno=m.mno
+    order by m.mno desc
+    limit #{startIndex}, #{pageSize}
+  </select>
+
+  <insert id="insert" parameterType="student">
+    insert into stud (sno, work, lst_schl, schl_nm, pst_no, bas_adr, det_adr, path) 
+    values(#{no}, #{workingYn}, #{lastEducation}, #{schoolName}, 
+           #{postNumber}, #{primaryAddress}, #{detailAddress}, #{photoName})
+  </insert>
+
+  <select id="selectOne" resultMap="studentMap" parameterType="int">
+    select  m.mno, m.name, m.tel, m.email, 
+            s.work , s.lst_schl, s.schl_nm, 
+            s.pst_no, s.bas_adr, s.det_adr, s.path
+    from stud s inner join memb m on s.sno=m.mno
+    where mno = #{memberNo}
+  </select>
+
+  <update id="update" parameterType="student">
+    update stud set 
+      work=#{workingYn}, 
+      lst_schl=#{lastEducation}, 
+      schl_nm=#{schoolName},
+      pst_no=#{postNumber},
+      bas_adr=#{primaryAddress},
+      det_adr=#{detailAddress},
+      path=#{photoName}
+    where sno=#{no}
+  </update>
+
+  <delete id="delete" parameterType="int">
+    delete from stud where sno=#{studentNo}
+  </delete>
+  
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="bigdata3.dao.IoTUserDao">
+  
+  <resultMap type="iotuser" id="userMap">
+    <id column="uno" property="no"/>
+    <result column="email" property="email"/>
+    <result column="name" property="name"/>
+    <result column="pwd" property="password"/>
+    <result column="token" property="token"/>
+  </resultMap>
+
+  <sql id="select1">
+    select uno, email, name, token 
+    from iot_user
+  </sql>
+
+  <select id="selectList" resultMap="userMap" parameterType="map">
+    <include refid="select1"/>
+    <if test="search != null">
+	    <where>
+	      <choose>
+		      <when test="search == 'email'">email = #{value}</when>
+		      <when test="search == 'name'">name like concat('%', #{value}, '%')</when>
+	      </choose>
+	    </where>
+    </if>    
+    order by email asc 
+    limit #{startIndex}, #{pageSize}
+  </select>
+  
+  <select id="selectOne" resultMap="userMap" parameterType="string">
+    <include refid="select1"/> 
+    where email = #{value}
+  </select>
+
+  <select id="selectOneByUserNo" resultMap="userMap" parameterType="int">
+    <include refid="select1"/> 
+    where uno = #{value}
+  </select>
+    
+  <select id="selectOneByEmailPassword" resultMap="userMap" parameterType="map">
+    <include refid="select1"/> 
+    where email=#{email} and pwd=password(#{password})
+  </select>
+  
+  <insert id="insert" parameterType="iotuser" 
+          useGeneratedKeys="true" keyColumn="uno" keyProperty="no">
+    insert into iot_user(email,name,pwd) 
+    values(#{email},#{name},password(#{password}))
+  </insert>
+  
+  <update id="updateToken" parameterType="iotuser">
+    update iot_user set 
+      token=#{token} 
+    where email=#{email}
+  </update>
+  
+  <delete id="delete" parameterType="string">
+    delete from iot_user 
+    where email=#{value}
+  </delete>
+
+</mapper>
+
+
+
+

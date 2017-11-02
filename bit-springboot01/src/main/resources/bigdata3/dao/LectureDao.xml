@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bigdata3.dao.LectureDao">
+<resultMap type="lecture" id="lectureMap">
+    <id column="lno" property="lectureNo"/>
+    <result column="crmno" property="classroomNo"/>
+    <result column="mrno" property="managerNo"/>
+    <result column="titl" property="title"/>
+    <result column="dscp" property="descript"/>
+    <result column="sdt" property="startDate"/>
+    <result column="edt" property="endDate"/>
+    <result column="qty" property="qty"/>
+    <result column="pric" property="price"/>
+    <result column="thrs" property="thours"/>
+  </resultMap>
+
+  <select id="selectList" resultMap="lectureMap" parameterType="map">
+    select  lno, crmno, mrno, titl, dscp, sdt, edt, qty, pric, thrs
+    from lect
+    order by titl asc 
+    limit #{startIndex}, #{pageSize}
+  </select>
+  
+  <select id="selectOne" resultMap="lectureMap" parameterType="int">
+    select lno, crmno, mrno, titl, dscp, sdt, edt, qty, pric, thrs
+    from lect
+    where lno = #{lecturNo}
+  </select>
+  
+  
+  
+  <insert id="insert" parameterType="lecture" 
+          useGeneratedKeys="true" keyColumn="lno" keyProperty="lectureNo">
+    insert into lect(crmno, mrno, titl, dscp, sdt, edt, qty, pric, thrs) 
+    values(#{classroomNo}, #{managerNo}, #{title}, 
+           #{descript}, #{startDate}, #{endDate},#{qty}, #{price}, #{thours})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from lect where lno=#{lectureNo}
+  </delete>
+  
+    <update id="update" parameterType="lecture">
+    update lect set
+      crmno=#{classroomNo},
+      mrno=#{managerNo},
+      titl=#{title}, 
+      dscp=#{descript}, 
+      sdt=#{startDate}, 
+      edt=#{endDate}, 
+      qty=#{qty}, 
+      pric=#{price}, 
+      thrs=#{thours}
+    where lno=#{lectureNo}
+  </update>  
+  
+  
+  
+</mapper> 
+
+
+
+
+
+
+
+
+
+
+
+

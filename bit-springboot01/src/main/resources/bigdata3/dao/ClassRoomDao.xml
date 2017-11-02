@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- 맵퍼의 namespace 값은 DAO 인터페이스의 이름과 같게 하라! --> 
+<mapper namespace="bigdata3.dao.ClassRoomDao">
+  
+  <!-- DB 컬럼과 자바 객체의 프로퍼티를 연결하는 정보 -->
+  <resultMap type="classroom" id="classroomMap">
+    <id column="crmno" property="no"/>
+    <result column="name" property="name"/>
+    <collection property="photoNames" ofType="string" >
+      <result column="path"/>
+    </collection>
+  </resultMap>
+  
+  <resultMap type="classroom" id="classroomSimpleMap">
+    <id column="crmno" property="no"/>
+    <result column="name" property="name"/>
+  </resultMap>  
+
+  <select id="selectList" resultMap="classroomSimpleMap" parameterType="map">
+    select crmno, name
+    from croom    
+    order by name asc 
+    limit #{startIndex}, #{pageSize}
+  </select>
+
+  <insert id="insert" parameterType="classroom"
+          useGeneratedKeys="true" keyColumn="crmno" keyProperty="no">
+    insert into croom(name) 
+    values(#{name})
+  </insert>
+  
+  <select id="selectOne" resultMap="classroomMap" parameterType="int">
+    select  cr.crmno, cr.name, cp.cpno, cp.path
+    from croom cr left outer join croom_phot cp on cr.crmno=cp.crmno
+    where cr.crmno = #{no}
+    order by name asc, path asc
+  </select>
+  
+  <update id="update" parameterType="classroom">
+    update croom set 
+      name=#{name} 
+    where crmno=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from croom where crmno=#{no}
+  </delete>  
+  
+  <insert id="insertPhoto" parameterType="map">
+    insert into croom_phot(crmno,path) 
+    values(#{classroomNo}, #{photoName})
+  </insert> 
+  
+  <delete id="deletePhoto" parameterType="int">
+    delete from croom_phot where crmno=#{no}
+  </delete>  
+</mapper>
+
+
+
+
+
+
+

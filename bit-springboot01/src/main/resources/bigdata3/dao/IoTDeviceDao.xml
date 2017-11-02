@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="bigdata3.dao.IoTDeviceDao">
+  
+  <resultMap type="iotdevice" id="deviceMap">
+    <id column="dno" property="no"/>
+    <result column="sno" property="serialNo"/>
+    <result column="uno" property="userNo"/>
+  </resultMap>
+
+  <sql id="select1">
+    select dno, sno, uno 
+    from iot_device
+  </sql>
+
+  <select id="selectList" resultMap="deviceMap" parameterType="map">
+    <include refid="select1"/>
+    <if test="search != null">
+	    <where>
+	      <choose>
+		      <when test="search == 'sno'">sno = #{value}</when>
+		      <when test="search == 'uno'">uno = #{value}</when>
+	      </choose>
+	    </where>
+    </if>    
+    order by dno desc 
+    limit #{startIndex}, #{pageSize}
+  </select>
+  
+  <select id="selectOne" resultMap="deviceMap" parameterType="string">
+    <include refid="select1"/> 
+    where sno = #{value}
+  </select>
+  
+  <insert id="insert" parameterType="iotdevice" 
+          useGeneratedKeys="true" keyColumn="dno" keyProperty="no">
+    insert into iot_device(sno) 
+    values(#{serialNo})
+  </insert>
+  
+  <update id="updateUserNo" parameterType="iotdevice">
+    update iot_device set 
+      uno=#{userNo} 
+    where sno=#{serialNo}
+  </update>
+  
+  <delete id="delete" parameterType="string">
+    delete from iot_device 
+    where sno=#{value}
+  </delete>
+
+</mapper>
+
+
+
+
