@@ -7,6 +7,7 @@
 **/temp/
 **/.class
 **/.log
+**/package-lock.json
 **/.DS_Store
 **/Debug
 **/Release
