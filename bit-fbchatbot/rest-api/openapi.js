@@ -30,7 +30,7 @@ const searchNewAddress = (type, searchWord, callback) => {
             var countPerPage = headers.countPerPage[0];
             var currentPage = headers.currentPage[0];
         
-            cosole.log('[주소 검색 결과]')
+            console.log('[주소 검색 결과]')
             console.log(totalCount);
             console.log(countPerPage);
             console.log(currentPage);
