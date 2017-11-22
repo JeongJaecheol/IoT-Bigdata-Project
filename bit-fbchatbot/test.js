@@ -12,7 +12,7 @@ parseString(xml, (err, result) => {
     console.log(countPerPage);
     console.log(currentPage);
     console.log('------------------------------');
-    
+
     var addrList = result.NewAddressListResponse.newAddressListAreaCd;
     for (var addr of addrList) {
         console.log(addr.zipNo[0]);
