@@ -16,7 +16,8 @@ const handleReceiveMessage = (event) => {
     
     if (messageText == 'help') {
         sendAPI.sendMenuMessage(senderID);
-        
+        console.log('user =====>', global[senderID].user);
+
     } else if (messageText.startsWith('searchAddress:')) {
         try {
             var arr = messageText.split(':')[1].split('=');
