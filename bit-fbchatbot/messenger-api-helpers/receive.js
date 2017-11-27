@@ -24,14 +24,16 @@ const handleReceiveMessage = (event) => {
     } else if (menu == 'calc') {
         menuCalc(senderID, messageText);
 
-    } else if (messageText.startsWith('searchAddress:')) {
+    } else if (menu.startsWith('addr_')) { // 동,도로명,우편번호를 검색한다면,
         try {
-            var arr = messageText.split(':')[1].split('=');
-            openAPI.searchNewAddress(arr[0], arr[1], (msg) => {
+            var type = menu.substring(5);
+            var searchWord = messageText;
+            openAPI.searchNewAddress(type, searchWord, (msg) => {
                 sendAPI.sendTextMessage(senderID, msg);
             });
         } catch (err) {
-            console.log(err)
+            sendAPI.sendTextMessage('주소 검색을 할 수 없습니다!');
+            console.log(err);
         }
     } else {
         sendAPI.sendTextMessage(senderID, messageText);
@@ -125,10 +127,15 @@ const menuCalc = (senderID, messageText) => {
 const menuAddr = (senderID, payload) => {
     if (payload == 'addr_dong') {
         sendAPI.sendTextMessage(senderID, '동 이름?');
+        global[senderID].menu = 'addr_dong';
+
     } else if (payload == 'addr_road') {
         sendAPI.sendTextMessage(senderID, '도로명?');
+        global[senderID].menu = 'addr_road';
+
     } else if (payload == 'addr_post') {
         sendAPI.sendTextMessage(senderID, '우편번호?');
+        global[senderID].menu = 'addr_post';
     }
 };
 
