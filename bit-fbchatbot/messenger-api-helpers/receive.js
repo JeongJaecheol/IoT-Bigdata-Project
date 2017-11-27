@@ -16,13 +16,13 @@ const handleReceiveMessage = (event) => {
     
     var menu = global[senderID].menu; // 사용자의 현재 메뉴
 
-    if (menu == 'calc') {
-        menuCalc(senderID, messageText);
-
-    } else if (messageText == 'help') {
+    if (messageText == 'help') {
         sendAPI.sendMenuMessage(senderID);
         // 현재 help를 출력한 상태임을 저장한다.
         global[senderID].menu = 'help';
+
+    } else if (menu == 'calc') {
+        menuCalc(senderID, messageText);
 
     } else if (messageText.startsWith('searchAddress:')) {
         try {
@@ -115,7 +115,7 @@ const menuCalc = (senderID, messageText) => {
             '계산 결과는 ' + result + ' 입니다.')
     } catch (exception) {
         sendAPI.sendTextMessage(senderID, 
-            '계산식 형식이 옳지 않습니다.\n예)값1 연산자 값2')
+            '계산식이 옳지 않습니다.\n예)값1 연산자 값2')
     }
 };
 
