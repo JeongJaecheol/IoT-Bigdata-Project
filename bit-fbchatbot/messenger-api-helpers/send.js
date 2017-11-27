@@ -14,6 +14,42 @@ const sendTextMessage = (recipientId, messageText) => {
     api.callMessagesAPI(messageData);
 };
 
+const sendMenuMessage = (recipientId) => {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"메뉴",
+          "buttons":[
+            {
+              "type":"postback",
+              "title":"LED",
+              "payload":"menu_led"
+            },
+            {
+              "type":"postback",
+              "title":"계산기",
+              "payload":"menu_calc"
+            },
+            {
+              "type":"postback",
+              "title":"주소검색",
+              "payload":"menu_addr"
+            }
+          ]
+        }
+      }
+    }
+  };
+
+  api.callMessagesAPI(messageData);
+};
+
 const sendImageMessage = (recipientId) => {
     var messageData = {
       recipient: {
