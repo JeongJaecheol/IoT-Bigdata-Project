@@ -53,7 +53,7 @@ const handleReceivePostback = (event) => {
         menuHelp(senderID, payload);
     } else if (menu == 'led') {
         menuLed(senderID, payload);
-    }
+    } else if (menu == )
     /*
     if (payload == 'led_on') {
         sendAPI.sendTextMessage(senderID, "전구를 켜겠습니다.");
@@ -73,7 +73,8 @@ const menuHelp = (senderID, payload) => {
         global[senderID].menu = 'calc'; // 이 사용자의 현재 메뉴는 '계산기'이다.
 
     } else if (payload == 'menu_addr') {
-        console.log('주소검색 메뉴를 누렀네요!')
+        sendAPI.sendAddressSearchMessage(senderID);
+        global[senderID].menu = 'addr'; // 이 사용자의 현재 메뉴는 '주소검색'이다.
     }
 };
 
