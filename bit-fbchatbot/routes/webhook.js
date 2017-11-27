@@ -69,7 +69,6 @@ router.post('/', (req, res) => {
           global[senderID] = {
             'user': senderID
           }; // 빈 보관소를 만들어 글로벌 객체에 저장한다.
-          console.log(senderID, '===> 세션 객체를 준비했습니다.');
         }
 
         if (event.message) {
