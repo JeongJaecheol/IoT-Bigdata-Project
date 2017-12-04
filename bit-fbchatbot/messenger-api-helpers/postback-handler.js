@@ -14,7 +14,7 @@ const getHandler = (postback) => {
     return postbackHandler[postback];
 };
 
-addMessage('/led', (recipientId) => {
+addPostback('/led', (recipientId) => {
     var messageData = {
       recipient: {
         id: recipientId
@@ -45,11 +45,11 @@ addMessage('/led', (recipientId) => {
     api.callMessagesAPI(messageData);
 });
 
-addMessage('/led/on', (recipientId) => {
+addPostback('/led/on', (recipientId) => {
     sendAPI.sendTextMessage(senderID, 'LED를 켭니다.')
 });
 
-addMessage('/led/off', (recipientId) => {
+addPostback('/led/off', (recipientId) => {
     sendAPI.sendTextMessage(senderID, 'LED를 끕니다.')
 });
 
