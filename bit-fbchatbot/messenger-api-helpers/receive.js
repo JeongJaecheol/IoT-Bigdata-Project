@@ -73,21 +73,6 @@ const handleReceivePostback = (event) => {
     }
 };
 
-const menuHelp = (senderID, payload) => {
-    if (payload == 'menu_led') {
-        sendAPI.sendLedMessage(senderID);
-        global[senderID].menu = 'led'; // 이 사용자의 현재 메뉴는 'LED 스위치'이다.
-
-    } else if (payload == 'menu_calc') {
-        sendAPI.sendTextMessage(senderID, '식을 입력하세요.\n예)2 + 3');
-        global[senderID].menu = 'calc'; // 이 사용자의 현재 메뉴는 '계산기'이다.
-
-    } else if (payload == 'menu_addr') {
-        sendAPI.sendAddressSearchMessage(senderID);
-        global[senderID].menu = 'addr'; // 이 사용자의 현재 메뉴는 '주소검색'이다.
-    }
-};
-
 const menuCalc = (senderID, messageText) => {
     // 현재 계산기 메뉴일 때는 사용자가 입력한 값이 
     // 계산식이라고 가정하고 메시지를 분석한다.
