@@ -1,4 +1,5 @@
 const api = require('./api')
+const sendAPI = require('./send');
 
 // message를 받았을 때 그 메시지를 처리할 함수를 보관하는 객체 
 const messageHandler = {
@@ -49,6 +50,37 @@ addMessage('help', (recipientId) => {
         }
     };
     api.callMessagesAPI(messageData);    
+});
+
+// 현재 계산기 메뉴일 때는 사용자가 입력한 값을 처리하는 함수 등록 
+addMessage('/calc', (recipientId, messageText) => {
+    // 계산식을 분석한다.
+    try {
+        var tokens = messageText.split(' ');
+        if (tokens.length != 3)
+            throw '계산 형식 오류';
+
+        var a = parseInt(tokens[0]);
+        var op = tokens[1];
+        var b = parseInt(tokens[2]);
+        var result = 0;
+        switch (op) {
+        case '+': result = a + b; break;
+        case '-': result = a - b; break;
+        case '*': result = a * b; break;
+        case '/': result = a / b; break;
+        case '%': result = a % b; break;
+        default:
+            sendAPI.sendTextMessage(senderID, 
+                '+, -, *, /, % 연산자만 사용할 수 있습니다.')
+            return;
+        }
+        sendAPI.sendTextMessage(senderID, 
+            '계산 결과는 ' + result + ' 입니다.')
+    } catch (exception) {
+        sendAPI.sendTextMessage(senderID, 
+            '계산식이 옳지 않습니다.\n예)값1 연산자 값2')
+    }
 });
 
 module.exports = {
