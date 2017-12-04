@@ -1,6 +1,7 @@
 const sendAPI = require('./send');
 const openAPI = require('../rest-api/openapi')
 const messageHandler = require('./message-handler')
+const postbackHandler = require('./postback-handler')
 
 const handleReceiveMessage = (event) => {
     var senderID = event.sender.id;
@@ -18,13 +19,13 @@ const handleReceiveMessage = (event) => {
     var menu = global[senderID].menu; // 사용자의 현재 메뉴
 
     // 사용자가 입력한 메시지를 처리할 함수를 꺼낸다.
-    //var handler = messageHandler.getHandler(messageText);
+    var handler = messageHandler.getHandler(messageText);
 
-    //if (handler) { // 메시지를 처리할 함수가 있다면,
-    //    handler(senderID); // 그 함수를 호출한다.
-    //} else {
+    if (handler) { // 메시지를 처리할 함수가 있다면,
+        handler(senderID); // 그 함수를 호출한다.
+    } else {
         sendAPI.sendTextMessage(senderID, '유효한 명령이 아닙니다.');
-    //}
+    }
 
     /*
     if (messageText == 'help') {
@@ -61,6 +62,15 @@ const handleReceivePostback = (event) => {
     console.log("Received postback for user %d and page %d with payload '%s' at %d",
                senderID, recipientID, payload, timeOfPostback);
 
+    // 사용자가 클릭한 버튼의 postback을 처리할 함수를 꺼낸다.
+    var handler = postbackHandler.getHandler(payload);
+    
+    if (handler) { // postback을 처리할 함수가 있다면,
+        handler(senderID); // 그 함수를 호출한다.
+    } else {
+        sendAPI.sendTextMessage(senderID, '유효한 명령이 아닙니다.');
+    }
+    /*
     var menu = global[senderID].menu;
 
     if (menu == 'help') {
@@ -72,6 +82,7 @@ const handleReceivePostback = (event) => {
     } else {
         sendAPI.sendTextMessage(senderID, "메뉴를 다시 요청하세요!");
     }
+    */
 };
 
 const menuHelp = (senderID, payload) => {
@@ -86,17 +97,6 @@ const menuHelp = (senderID, payload) => {
     } else if (payload == 'menu_addr') {
         sendAPI.sendAddressSearchMessage(senderID);
         global[senderID].menu = 'addr'; // 이 사용자의 현재 메뉴는 '주소검색'이다.
-    }
-};
-
-const menuLed = (senderID, payload) => {
-    if (payload == 'led_on') {
-        sendAPI.sendTextMessage(senderID, 'LED를 켭니다.')
-        // 나중에 스프링부트에 LED를 켜는 명령을 보낼 것이다.
-
-    } else if (payload == 'led_off') {
-        sendAPI.sendTextMessage(senderID, 'LED를 끕니다.')
-        // 나중에 스프링부트에 LED를 끄는 명령을 보낼 것이다.
     }
 };
 

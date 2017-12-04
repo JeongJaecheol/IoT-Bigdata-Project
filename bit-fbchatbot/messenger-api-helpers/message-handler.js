@@ -31,17 +31,17 @@ addMessage('help', (recipientId) => {
                 {
                   "type":"postback",
                   "title":"LED",
-                  "payload":"menu_led"
+                  "payload":"/led"
                 },
                 {
                   "type":"postback",
                   "title":"계산기",
-                  "payload":"menu_calc"
+                  "payload":"/calc"
                 },
                 {
                   "type":"postback",
                   "title":"주소검색",
-                  "payload":"menu_addr"
+                  "payload":"/addr"
                 }
               ]
             }
