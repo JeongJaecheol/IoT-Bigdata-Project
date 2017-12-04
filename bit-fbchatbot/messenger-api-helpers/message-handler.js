@@ -83,6 +83,36 @@ addMessage('/calc', (recipientId, messageText) => {
     }
 });
 
+addMessage('/addr/dong', (recipientId, messageText) => {
+    try {
+        openAPI.searchNewAddress('dong', messageText, (msg) => {
+            sendAPI.sendTextMessage(recipientId, msg);
+        });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+addMessage('/addr/road', (recipientId, messageText) => {
+    try {
+        openAPI.searchNewAddress('road', messageText, (msg) => {
+            sendAPI.sendTextMessage(recipientId, msg);
+        });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+addMessage('/addr/post', (recipientId, messageText) => {
+    try {
+        openAPI.searchNewAddress('post', messageText, (msg) => {
+            sendAPI.sendTextMessage(recipientId, msg);
+        });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
 module.exports = {
     getHandler
 };
