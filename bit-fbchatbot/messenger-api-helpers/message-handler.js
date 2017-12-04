@@ -71,14 +71,14 @@ addMessage('/calc', (recipientId, messageText) => {
         case '/': result = a / b; break;
         case '%': result = a % b; break;
         default:
-            sendAPI.sendTextMessage(senderID, 
+            sendAPI.sendTextMessage(recipientId, 
                 '+, -, *, /, % 연산자만 사용할 수 있습니다.')
             return;
         }
-        sendAPI.sendTextMessage(senderID, 
+        sendAPI.sendTextMessage(recipientId, 
             '계산 결과는 ' + result + ' 입니다.')
     } catch (exception) {
-        sendAPI.sendTextMessage(senderID, 
+        sendAPI.sendTextMessage(recipientId, 
             '계산식이 옳지 않습니다.\n예)값1 연산자 값2')
     }
 });
