@@ -18,13 +18,13 @@ const handleReceiveMessage = (event) => {
     var menu = global[senderID].menu; // 사용자의 현재 메뉴
 
     // 사용자가 입력한 메시지를 처리할 함수를 꺼낸다.
-    var handler = messageHandler.getHandler(messageText);
+    //var handler = messageHandler.getHandler(messageText);
 
-    if (handler) { // 메시지를 처리할 함수가 있다면,
-        handler(senderID); // 그 함수를 호출한다.
-    } else {
+    //if (handler) { // 메시지를 처리할 함수가 있다면,
+    //    handler(senderID); // 그 함수를 호출한다.
+    //} else {
         sendAPI.sendTextMessage(senderID, '유효한 명령이 아닙니다.');
-    }
+    //}
 
     /*
     if (messageText == 'help') {
