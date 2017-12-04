@@ -53,6 +53,52 @@ addPostback('/led/off', (recipientId) => {
     sendAPI.sendTextMessage(recipientId, 'LED를 끕니다.')
 });
 
+addPostback('/addr', (recipientId) => {
+    var messageData = {
+      recipient: {
+        id: recipientId
+      },
+      message: {
+        "attachment":{
+          "type":"template",
+          "payload":{
+            "template_type":"button",
+            "text":"검색 항목",
+            "buttons":[
+              {
+                "type":"postback",
+                "title":"동이름",
+                "payload":"/addr/dong"
+              },
+              {
+                "type":"postback",
+                "title":"도로명",
+                "payload":"/addr/road"
+              },
+              {
+                "type":"postback",
+                "title":"우편번호",
+                "payload":"/addr/post"
+              }
+            ]
+          }
+        }
+      }
+    };
+    api.callMessagesAPI(messageData);
+});
+
+addPostback('/addr/dong', (recipientId) => {
+    sendAPI.sendTextMessage(recipientId, '동 이름?');
+});
+
+addPostback('/addr/road', (recipientId) => {
+    sendAPI.sendTextMessage(recipientId, '도로명?');
+});
+
+addPostback('/addr/post', (recipientId) => {
+    sendAPI.sendTextMessage(recipientId, '우편번호?');
+});
 
 module.exports = {
     getHandler

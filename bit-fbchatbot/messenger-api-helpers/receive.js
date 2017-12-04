@@ -66,23 +66,11 @@ const handleReceivePostback = (event) => {
     var handler = postbackHandler.getHandler(payload);
     
     if (handler) { // postback을 처리할 함수가 있다면,
+        global[senderID].menu = payload;
         handler(senderID); // 그 함수를 호출한다.
     } else {
         sendAPI.sendTextMessage(senderID, '유효한 명령이 아닙니다.');
     }
-    /*
-    var menu = global[senderID].menu;
-
-    if (menu == 'help') {
-        menuHelp(senderID, payload);
-    } else if (menu == 'led') {
-        menuLed(senderID, payload);
-    } else if (menu == 'addr') {
-        menuAddr(senderID, payload);
-    } else {
-        sendAPI.sendTextMessage(senderID, "메뉴를 다시 요청하세요!");
-    }
-    */
 };
 
 const menuHelp = (senderID, payload) => {
@@ -131,20 +119,7 @@ const menuCalc = (senderID, messageText) => {
     }
 };
 
-const menuAddr = (senderID, payload) => {
-    if (payload == 'addr_dong') {
-        sendAPI.sendTextMessage(senderID, '동 이름?');
-        global[senderID].menu = 'addr_dong';
 
-    } else if (payload == 'addr_road') {
-        sendAPI.sendTextMessage(senderID, '도로명?');
-        global[senderID].menu = 'addr_road';
-
-    } else if (payload == 'addr_post') {
-        sendAPI.sendTextMessage(senderID, '우편번호?');
-        global[senderID].menu = 'addr_post';
-    }
-};
 
 module.exports = {
     handleReceiveMessage,
