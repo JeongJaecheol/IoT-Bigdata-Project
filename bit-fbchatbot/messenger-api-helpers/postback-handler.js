@@ -89,7 +89,7 @@ addPostback('/addr', (recipientId) => {
 });
 
 addPostback('/addr/dong', (recipientId) => {
-    sendAPI.sendTextMessage(recipientId, '동 이름?');
+    sendAPI.sendTextMessage(recipientId, '동이름?');
 });
 
 addPostback('/addr/road', (recipientId) => {
