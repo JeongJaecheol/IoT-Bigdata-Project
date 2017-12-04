@@ -1,4 +1,4 @@
-const api = require('./api')
+const api = require('./api');
 const sendAPI = require('./send');
 
 // postback을 받았을 때 그 postback을 처리할 함수를 보관하는 객체
