@@ -29,31 +29,6 @@ const handleReceiveMessage = (event) => {
     } else {
         sendAPI.sendTextMessage(senderID, '유효한 명령이 아닙니다.');
     }
-
-    /*
-    if (messageText == 'help') {
-        sendAPI.sendMenuMessage(senderID);
-        // 현재 help를 출력한 상태임을 저장한다.
-        global[senderID].menu = 'help';
-
-    } else if (menu == 'calc') {
-        menuCalc(senderID, messageText);
-
-    } else if (menu.startsWith('addr_')) { // 동,도로명,우편번호를 검색한다면,
-        try {
-            var type = menu.substring(5);
-            var searchWord = messageText;
-            openAPI.searchNewAddress(type, searchWord, (msg) => {
-                sendAPI.sendTextMessage(senderID, msg);
-            });
-        } catch (err) {
-            sendAPI.sendTextMessage('주소 검색을 할 수 없습니다!');
-            console.log(err);
-        }
-    } else {
-        sendAPI.sendTextMessage(senderID, messageText);
-    }*/
-
 };
 
 const handleReceivePostback = (event) => {
@@ -75,6 +50,7 @@ const handleReceivePostback = (event) => {
         sendAPI.sendTextMessage(senderID, '유효한 명령이 아닙니다.');
     }
 };
+
 
 module.exports = {
     handleReceiveMessage,
