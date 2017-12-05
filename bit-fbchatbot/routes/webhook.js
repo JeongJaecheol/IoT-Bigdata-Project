@@ -34,12 +34,6 @@ router.get('/', (req, res) => {
 // 5) 사용자의 메신저에 응답 내용을 출력된다.
 router.post('/', (req, res) => {
 
-  // 메신저 서버에서 요청을 받으면 일단 응답한다.
-  // 이유? 
-  // - 20초 이내에 응답을 해야한다.
-  // - 일단 응답한 후 요청 처리 작업을 해도 된다.
-  res.sendStatus(200);
-
   // 응답한 후 요청을 처리하는 작업을 수행한다.
   // => 메신저 서버가 보낸 데이터를 꺼낸다.
   var data = req.body;
@@ -87,8 +81,16 @@ router.post('/', (req, res) => {
 
     }); // data.entry.forEach()
 
-  } // if (data.object === 'page') {}
-  
+    // 메신저 서버에서 요청을 받으면 일단 응답한다.
+    // 이유? 
+    // - 20초 이내에 응답을 해야한다.
+    // - 일단 응답한 후 요청 처리 작업을 해도 된다.
+    res.sendStatus(200);    
+
+  } else { // if (data.object === 'page') 
+    // 페이지가 받은 메시지가 아니면 '404 Not Found'를 응답한다.
+    res.sendStatus(404);
+  }
 }); // router.post('/', ...)
     
 module.exports = router;
