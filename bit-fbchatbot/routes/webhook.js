@@ -6,6 +6,7 @@ const express = require('express');
 
 // 메시지 이벤트를 처리할 API를 가져온다.
 const receiveAPI = require('../messenger-api-helpers/receive');
+const sendAPI = require('../messenger-api-helpers/send');
 
 // 클라이언트 요청이 들어왔을 때 함수를 호출해주는 객체 
 const router = express.Router();
