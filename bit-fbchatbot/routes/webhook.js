@@ -67,14 +67,15 @@ router.post('/', (req, res) => {
 
         if (event.message) {
           console.log('event.message===> ', event.message)
-          receiveAPI.handleReceiveMessage(event);
+          //receiveAPI.handleReceiveMessage(event);
+          sendAPI.sendTextMessage(senderID,  event.message.text);
 
         } else if (event.postback) {
           console.log('event.postback===> ', event.postback)
-          receiveAPI.handleReceivePostback(event);  
-
+          //receiveAPI.handleReceivePostback(event);  
+          sendAPI.sendTextMessage(senderID, event.postback.payload);
         } else {
-          //console.log("unknown event===> ", event);
+          console.log('unknown event===> ');//, event);
         }
 
       }); // entry.messaging.forEach()
