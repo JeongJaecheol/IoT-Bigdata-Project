@@ -22,7 +22,7 @@ const callMessagesAPI = (messageData) => {
             }
         } else {
             console.error("Failed calling Send API", 
-                error, body.error);
+                error, body);
         }
     });  
 };
