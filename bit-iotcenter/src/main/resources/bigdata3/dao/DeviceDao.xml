@@ -3,19 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="bigdata3.dao.IoTDeviceDao">
+<mapper namespace="bigdata3.dao.DeviceDao">
   
-  <resultMap type="iotdevice" id="deviceMap">
-    <id column="dno" property="no"/>
-    <result column="sno" property="serialNo"/>
-    <result column="uno" property="userNo"/>
+  <resultMap type="device" id="deviceMap">
+    <id column="dno"          property="deviceNo"/>
+    <result column="sn"       property="serialNo"/>
+    <result column="dev_type" property="deviceType"/>
+    <result column="status"   property="status"/>
+    <result column="uno"      property="userNo"/>
   </resultMap>
 
-  <sql id="select1">
-    select dno, sno, uno 
-    from iot_device
-  </sql>
-
+  <select id="selectListByType" resultMap="deviceMap" parameterType="map">
+    select d.dno, d.sn, d.dev_type, d.status, u.uno
+    from iot_device d left outer join iot_user u on d.uno = u.uno
+    where u.fbuid = #{fbUserId} and d.dev_type = #{deviceType};
+  </select>
+  
+<!--  
   <select id="selectList" resultMap="deviceMap" parameterType="map">
     <include refid="select1"/>
     <if test="search != null">
@@ -51,7 +55,7 @@
     delete from iot_device 
     where sno=#{value}
   </delete>
-
+-->
 </mapper>
 
 

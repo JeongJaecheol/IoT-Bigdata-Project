@@ -61,7 +61,7 @@ insert into iot_device(sn, dev_type, uno) values('1003', 'led', 3);
 -- 페이스북 ID를 이용하여 led 장비의 상태 정보 가져오기
 select u.uno, u.name, d.sn, d.dev_type, d.status 
 from iot_device d left outer join iot_user u on d.uno = u.uno
-where u.fbuid = '101';
+where u.fbuid = '101' and d.dev_type = 'led';
   
   
   

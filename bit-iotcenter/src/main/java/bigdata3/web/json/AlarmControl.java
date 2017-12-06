@@ -1,9 +1,6 @@
 package bigdata3.web.json;
 
 
-import static bigdata3.web.json.JsonResult.STATE_FAIL;
-import static bigdata3.web.json.JsonResult.STATE_SUCCESS;
-
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import bigdata3.domain.IoTDevice;
-import bigdata3.domain.IoTUser;
-import bigdata3.service.IoTDeviceService;
-import bigdata3.service.IoTUserService;
+import bigdata3.service.DeviceService;
 import bigdata3.util.FcmAgent;
-import bigdata3.util.FcmMessage;
 
 @RestController("json.AlarmControl")
 @RequestMapping("/alarm/json")
@@ -25,9 +18,9 @@ public class AlarmControl {
   
   @Autowired ServletContext application;
   
-  @Autowired IoTUserService userService;
+  //@Autowired IoTUserService userService;
   
-  @Autowired IoTDeviceService deviceService;
+  @Autowired DeviceService deviceService;
   
   @Autowired FcmAgent fcmAgent;
     
@@ -35,9 +28,9 @@ public class AlarmControl {
   public Object change(
       @PathVariable String serialNo,
       @RequestParam String message) throws Exception {
-    
+/*   
     //=> 제품 번호를 이용하여 장비 정보를 가져온다.
-    IoTDevice device = deviceService.get(serialNo);
+    //IoTDevice device = deviceService.get(serialNo);
 
     //=> 장비가 등록되어 있지 않다면,
     if (device == null) {
@@ -65,8 +58,9 @@ public class AlarmControl {
         message, //=> message 
         "IoT 경고", //=> title
         "감지장치(" + serialNo + ")에 변화가 발생했습니다.")); //=> text
-    
     return new JsonResult(STATE_SUCCESS, result);
+ */
+    return null;
   }
   
  
