@@ -13,9 +13,10 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'eclipse' // 이클립스 IDE를 위한 설정 파일을 생성하기 위해 플러그인 추가
+apply plugin: 'application'
 
 jar { // jar 파일을 만들 때 사용할 정보 
-    baseName = 'myproject'
+    baseName = 'iotcenter'
     version =  '0.0.1-SNAPSHOT'
 }
 
@@ -64,9 +65,9 @@ compileJava { // 자바 컴파일러에게 전달하는 정보.
 }
 
 // "gradle bootRun" 명령을 실행할 때 사용할 메인 클래스를 지정한다.
-bootRun {
+//bootRun {
   mainClassName = 'bigdata3.Application'
-}
+//}
 
 
 
