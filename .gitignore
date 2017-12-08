@@ -13,4 +13,7 @@
 **/Release
 **/.env
 **/.settings/
+*.key
+*.pem
+*.crt
 !build.gradle
