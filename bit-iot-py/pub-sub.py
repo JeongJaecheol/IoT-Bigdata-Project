@@ -7,14 +7,12 @@ import json
 
 # AWS IoT 서버에서 메시지를 받았을 때 호출될 함수 정의 
 def customCallback(client, userdata, message):
-    print("메시지를 수신하였습니다! \n")
+    print("메시지를 수신하였습니다!")
     print("사서함 이름: ")
     print(message.topic)
-    print("\n")
     print("메시지 내용: ")
     print(message.payload)
-    print("\n")
-    print("--------------\n")
+    print("--------------")
 
 # AWS IoT의 Thing에 접속할 때 사용할 정보 준비
 
