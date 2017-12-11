@@ -13,3 +13,6 @@
     - >>> import ssl
     - >>> ssl.OPENSSL_VERSION
     - 암호 모듈의 버전이 1.0 이상이어야 한다.
+- AWS IoT 파이썬 모듈 설치
+  - python 2.7 : pip install AWSIoTPythonSDK
+  - python 3.5 : pip3 install AWSIoTPythonSDK
