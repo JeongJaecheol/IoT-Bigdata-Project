@@ -19,7 +19,7 @@ def getCallback(payload, responseStatus, token):
     # AWSIoT 서버에서 받은 JSON 문자열을 객체로 변환
     dict = json.loads(payload)
     
-    if responseStatus == "rejected" and dict['code'] == 404:
+    if responseStatus == "rejected" and dict.code == 404:
         print("섀도우가 존재하지 않습니다.")
     else:
         print(dict['state']['desired']['led'])
