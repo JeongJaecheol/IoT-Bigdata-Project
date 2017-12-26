@@ -63,5 +63,5 @@ print("shadow connect\n")
 myDeviceShadow = myShadowClient.createShadowHandlerWithName("dev01", True)
 
 # shadow 값 변경하기
-myJSONPayload = '{"stat":{"desired":{"led":"on"}}}'
+myJSONPayload = '{"state":{"desired":{"led":"on"}}}'
 myDeviceShadow.shadowUpdate(myJSONPayload, updateCallback, 5)
