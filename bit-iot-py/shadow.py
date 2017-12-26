@@ -29,6 +29,10 @@ def getCallback(payload, responseStatus, token):
         print("현재 섀도우의 값은 다음과 같습니다.")
         print("led:" + dict['state']['desired']['led'])
         print(token)
+        if dict['state']['desired']['led'] == "on":
+            led.onLed(True)
+        else:
+            led.onLed(False)
     print("--------------")
 
 # AWS IoT의 Thing에 접속할 때 사용할 정보 준비
