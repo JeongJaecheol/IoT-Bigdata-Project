@@ -54,7 +54,7 @@ addPostback('/led/on', (recipientId) => {
       message: 'led on',
       led: 'on'});
     */
-    awtIoTShadow.update({led: "on"});
+    awsIoTShadow.update({led: "on"});
 });
 
 addPostback('/led/off', (recipientId) => {
@@ -64,7 +64,7 @@ addPostback('/led/off', (recipientId) => {
       message: 'led off',
       led: 'off'});
     */
-    awtIoTShadow.update({led: "off"});
+    awsIoTShadow.update({led: "off"});
 });
 
 addPostback('/addr', (recipientId) => {
