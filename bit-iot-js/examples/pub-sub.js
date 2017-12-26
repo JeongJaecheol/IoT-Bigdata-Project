@@ -1,5 +1,6 @@
-// AWS IoT의 Gateway에 메시지를 보내는 예제
+// AWS IoT의 Gateway로부터 메시지를 보내고 받는 예제
 // => 메시지를 보내는 것을 "발행(publish)"이라고 표현한다.
+// => 메시지를 받는 것을 "구독(subscribe)"라고 표현한다.
 
 // AWS에서 제공하는 nodeJS 모듈을 로딩한다.
 var awsIot = require('aws-iot-device-sdk');
