@@ -1,6 +1,7 @@
 const api = require('./api');
 const sendAPI = require('./send');
 const awsIoT = require('../iot-api/aws')
+const awsIoTShadow = require('../iot-api/shadow')
 
 // postback을 받았을 때 그 postback을 처리할 함수를 보관하는 객체
 const postbackHandler = {};
@@ -48,16 +49,22 @@ addPostback('/led', (recipientId) => {
 
 addPostback('/led/on', (recipientId) => {
     sendAPI.sendTextMessage(recipientId, 'LED를 켭니다.')
+    /*
     awsIoT.publish('dev01', 'topic_1', {
       message: 'led on',
       led: 'on'});
+    */
+    awtIoTShadow.update({led: "on"});
 });
 
 addPostback('/led/off', (recipientId) => {
     sendAPI.sendTextMessage(recipientId, 'LED를 끕니다.')
+    /*
     awsIoT.publish('dev01', 'topic_1', {
       message: 'led off',
       led: 'off'});
+    */
+    awtIoTShadow.update({led: "off"});
 });
 
 addPostback('/addr', (recipientId) => {
