@@ -20,6 +20,13 @@ thingShadows.on('connect', function() {
     });
 });
 
+// Thing의 Shadow에 대해 명령을 지시하고 그 명령을 수행한 후에 호출될 함수 등록
+thingShadows.on('status', 
+    function(thingName, stat, clientToken, stateObject) {
+        console.log('received '+stat+' on '+thingName+': '+
+                JSON.stringify(stateObject));
+});
+
 // 지정된 타임아웃 시간이 경과했을 때 호출될 함수 등록
 thingShadows.on('timeout',
     function(thingName, clientToken) {
